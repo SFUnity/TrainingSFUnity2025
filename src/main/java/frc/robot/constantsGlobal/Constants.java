@@ -11,7 +11,9 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 
-package frc.robot;
+package frc.robot.constantsGlobal;
+
+import edu.wpi.first.wpilibj.RobotBase;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -22,7 +24,10 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final Mode currentMode = Mode.REAL;
+  public static final double loopPeriodSecs = 0.02;
+  public static final Mode currentMode =
+      RobotBase.isReal() ? Mode.REAL : Mode.SIM; // Switch Mode.SIM to Mode.REPLAY to run replay
+  public static final boolean tuningMode = false;
 
   public static enum Mode {
     /** Running on a real robot. */
@@ -33,5 +38,13 @@ public final class Constants {
 
     /** Replaying from a log file. */
     REPLAY
+  }
+
+  /** Checks whether the correct robot is selected when deploying. */
+  public static void main(String... args) {
+    if (currentMode == Mode.SIM) {
+      System.err.println("Cannot deploy, invalid robot selected: " + currentMode);
+      System.exit(1);
+    }
   }
 }
