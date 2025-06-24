@@ -2,6 +2,7 @@ package frc.robot.subsystems.intake;
 
 import static frc.robot.subsystems.intake.IntakeConstants.*;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
@@ -64,4 +65,27 @@ public class Intake extends SubsystemBase {
   private void rollersOut() {
     io.runRollers(rollersSpeedOut);
   }
+
+  private void stop(){
+    io.runRollers(0);
+  }
+
+
+  public Command raiseAndStop(){
+    return run(() -> {
+        stop();
+        stow();
+    })
+    .withName("raise intake");
+  }
+
+  public Command intakeCommand(){
+    return run(() -> {
+        lower();
+        rollersIn();
+    })
+    .until(() -> coralPassed)
+    .withName("intake");
+  }
+  
 }
