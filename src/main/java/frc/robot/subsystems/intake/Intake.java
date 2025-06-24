@@ -23,6 +23,7 @@ public class Intake extends SubsystemBase{
     }
 
     public void periodic(){
+        io.updateInputs(inputs);
         if(inputs.pivotPositionDeg > IntakeConstants.loweredPositionDeg){
             lowered = true;
         }
@@ -48,5 +49,7 @@ public class Intake extends SubsystemBase{
     public boolean beamBreak() {
         return simBeamBreak;
     }
+
+
  
 }
