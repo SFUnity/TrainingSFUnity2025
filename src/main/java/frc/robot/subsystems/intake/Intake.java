@@ -66,26 +66,24 @@ public class Intake extends SubsystemBase {
     io.runRollers(rollersSpeedOut);
   }
 
-  private void stop(){
+  private void stop() {
     io.runRollers(0);
   }
 
-
-  public Command raiseAndStop(){
+  public Command raiseAndStop() {
     return run(() -> {
-        stop();
-        stow();
-    })
-    .withName("raise intake");
+          stop();
+          stow();
+        })
+        .withName("raise intake");
   }
 
-  public Command intakeCommand(){
+  public Command intakeCommand() {
     return run(() -> {
-        lower();
-        rollersIn();
-    })
-    .until(() -> coralPassed)
-    .withName("intake");
+          lower();
+          rollersIn();
+        })
+        .until(() -> coralPassed)
+        .withName("intake");
   }
-  
 }
