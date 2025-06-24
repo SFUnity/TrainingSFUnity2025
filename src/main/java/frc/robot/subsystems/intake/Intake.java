@@ -1,5 +1,7 @@
 package frc.robot.subsystems.intake;
 
+import static frc.robot.subsystems.intake.IntakeConstants.*;
+
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constantsGlobal.Constants;
@@ -10,12 +12,13 @@ public class Intake extends SubsystemBase{
     private final IntakeIO io;
     private final IntakeIOInputsAutoLogged inputs = new IntakeIOInputsAutoLogged();
 
+
     public boolean lowered = false;
     public boolean coralPassed = false;
     private boolean beamBreakTriggered = false;
     public static boolean simBeamBreak = false;
     public boolean stowed = true;
-
+    private double positionSetpoint = stowedPositionDeg;
 
 
     public Intake(IntakeIO io){
@@ -50,6 +53,21 @@ public class Intake extends SubsystemBase{
         return simBeamBreak;
     }
 
-
+    public void lower(){
+        positionSetpoint = loweredPositionDeg;
+        io.setPivot(positionSetpoint);
+    }
+    public void stow(){
+        positionSetpoint = stowedPositionDeg;
+        io.setPivot(positionSetpoint);
+    }
+    private void rollersIn() {
+        io.runRollers(rollersSpeedIn);
+    }
+    
+      private void rollersOut() {
+        io.runRollers(rollersSpeedOut);
+      }
+      
  
 }

@@ -16,6 +16,8 @@ public class IntakeConstants {
 
   public static final double loweredPositionDeg = 0;
   public static double stowedPositionDeg;
+  public static double rollersSpeedIn = -5;
+  public static double rollersSpeedOut = 5;
   static {
     switch (Constants.currentMode) {
       default:
