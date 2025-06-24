@@ -14,6 +14,8 @@ public class IntakeConstants {
 
   public static final LoggedTunableNumber kP;
 
+  public static final double loweredPositionDeg = 0;
+  public static double stowedPositionDeg;
   static {
     switch (Constants.currentMode) {
       default:
