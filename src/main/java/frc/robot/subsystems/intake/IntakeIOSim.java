@@ -57,9 +57,6 @@ public class IntakeIOSim implements IntakeIO {
     pivotAppliedVolts = MathUtil.clamp(volts, -12.0, 12.0);
     sim.setInputVoltage(pivotAppliedVolts);
   }
-  @Override
-  public boolean 
-
 
   private double getAngle() {
     return Units.radiansToDegrees(sim.getAngleRads() - minAngleRad);
